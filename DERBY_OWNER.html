@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101923">
+<title>DERBY OWNER</title>
+<style>
+:root{--bg:#0c141c;--panel:#17232e;--panel2:#1d2b37;--gold:#d7b66b;--gold2:#f0d99c;--text:#f4f1e8;--muted:#aab5bd;--line:#33434f;--green:#83b99a;--red:#d88979}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#314452 0,#111d27 44%,#091119 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;min-height:100vh}
+button{font:inherit;cursor:pointer;border:0} .app{max-width:1180px;margin:auto;padding:18px 16px 42px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 2px 18px;border-bottom:1px solid var(--line)}
+.brand{font-family:Georgia,serif;letter-spacing:.14em;font-size:clamp(22px,4vw,34px);font-weight:bold;color:var(--gold2)}.brand small{display:block;font:10px sans-serif;letter-spacing:.28em;color:var(--muted);margin-top:4px}
+.topstats{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.pill{background:#1c2a35;border:1px solid #43515a;border-radius:999px;padding:8px 12px;font-size:12px;color:var(--muted)}.pill b{color:var(--gold2);font-size:14px;margin-left:5px}
+.hero{margin:18px 0 16px;position:relative;overflow:hidden;border:1px solid #53616a;border-radius:18px;min-height:180px;background:linear-gradient(110deg,rgba(8,16,22,.92),rgba(13,28,36,.56)),radial-gradient(ellipse at 78% 75%,#6b755b 0,#263b36 34%,#182832 68%);display:flex;align-items:center;padding:25px}
+.hero:after{content:"";position:absolute;right:-20px;bottom:-60px;width:54%;height:190px;background:linear-gradient(165deg,transparent 20%,rgba(184,159,99,.16) 21% 23%,transparent 24%),linear-gradient(180deg,transparent,#0b171b);transform:skewY(-8deg);pointer-events:none}
+.hero-copy{position:relative;z-index:1;max-width:570px}.eyebrow{font-size:10px;letter-spacing:.28em;color:var(--gold);font-weight:bold}.hero h1{font:clamp(24px,4.6vw,38px) Georgia,serif;margin:8px 0}.hero p{color:#c1cbd0;line-height:1.7;font-size:13px;margin:0;max-width:490px}
+.hero-horse{position:absolute;right:5%;bottom:4px;font-size:clamp(80px,17vw,160px);filter:drop-shadow(0 12px 9px #0008);opacity:.88;transform:scaleX(-1)}
+.tabs{display:flex;gap:8px;margin:0 0 16px;overflow:auto;padding-bottom:4px}.tab{white-space:nowrap;background:#17242e;color:var(--muted);padding:11px 17px;border:1px solid var(--line);border-radius:10px;font-weight:700;font-size:13px}.tab.active{background:linear-gradient(135deg,#d8bd7b,#a98542);color:#17202a;border-color:#e7d29d}
+.layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(250px,.85fr);gap:16px}.panel{background:linear-gradient(155deg,rgba(29,43,55,.97),rgba(17,29,39,.97));border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 12px 30px #0002}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.panel h2{font:20px Georgia,serif;margin:0;color:var(--gold2)}.sub{font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.horse-card{background:linear-gradient(145deg,#263744,#192731);border:1px solid #40515d;border-radius:13px;overflow:hidden;cursor:pointer;transition:.18s}.horse-card:hover{border-color:var(--gold);transform:translateY(-2px)}.horse-card.selected{border:1px solid var(--gold);box-shadow:0 0 0 1px #d7b66b44}
+.horse-art{height:112px;background:radial-gradient(ellipse at 50% 100%,#5c6a55,#243a3b 60%,#1a2a33);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}.horse-art:before{content:"";position:absolute;bottom:16px;width:80%;height:2px;background:#bba56d55}.horse-emoji{font-size:75px;filter:drop-shadow(0 7px 5px #0009);transform:scaleX(-1)}.horse-label{position:absolute;top:9px;left:9px;background:#0d1922c9;border:1px solid #ffffff22;border-radius:20px;padding:4px 8px;font-size:10px;color:var(--gold2)}
+.horse-info{padding:11px}.horse-name{font-weight:800;font-size:15px}.horse-meta{font-size:10px;color:var(--muted);margin-top:4px}.horse-price{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px}.price{color:var(--gold2);font-weight:800}.tag{font-size:10px;color:#b8c6cc;background:#344651;padding:4px 7px;border-radius:20px}
+.btn{background:linear-gradient(135deg,#e0c783,#b38d4c);color:#18232c;padding:11px 15px;border-radius:9px;font-weight:800;font-size:12px;box-shadow:0 3px 0 #806333}.btn:active{transform:translateY(1px);box-shadow:0 1px 0 #806333}.btn.secondary{background:#293a46;color:var(--text);border:1px solid #52616b;box-shadow:none}.btn:disabled{opacity:.4;cursor:not-allowed}
+.detail{display:flex;gap:13px;align-items:center;margin-bottom:13px}.detail-art{width:100px;height:88px;flex:none;border-radius:12px;background:radial-gradient(ellipse at 50% 100%,#65745b,#263b3b 65%);display:grid;place-items:center;font-size:62px}.detail h3{margin:0 0 5px;font-size:18px}.detail p{margin:0;color:var(--muted);font-size:11px;line-height:1.6}
+.stat{margin:10px 0}.stat-top{display:flex;justify-content:space-between;font-size:11px;margin-bottom:5px}.bar{height:7px;border-radius:20px;background:#0b151d;overflow:hidden}.bar i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#9c8048,#e4cd8c)}
+.note{padding:10px 12px;background:#101d26;border:1px solid #334650;border-radius:10px;color:#b9c5cb;font-size:11px;line-height:1.6;margin-top:12px}
+.empty{padding:28px 12px;text-align:center;color:var(--muted);font-size:12px;line-height:1.8}
+.section{display:none}.section.active{display:block}
+.stable-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.stable-item{display:flex;gap:12px;align-items:center;background:#1c2b36;border:1px solid var(--line);border-radius:12px;padding:12px}.stable-item .mini{font-size:42px}.stable-item h3{font-size:14px;margin:0 0 4px}.stable-item p{font-size:10px;color:var(--muted);margin:0}
+.footer{color:#75838b;text-align:center;font-size:10px;margin-top:22px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:#e0c783;color:#14212a;padding:11px 17px;border-radius:30px;font-weight:800;font-size:12px;opacity:0;pointer-events:none;transition:.25s;z-index:5;box-shadow:0 8px 30px #0006}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.app{padding:12px 11px 32px}.layout{grid-template-columns:1fr}.hero{min-height:155px;padding:19px}.hero-horse{right:1%;opacity:.55}.grid{gap:8px}.horse-art{height:90px}.horse-emoji{font-size:62px}.panel{padding:13px}.stable-list{grid-template-columns:1fr}.topstats{gap:5px}.pill{padding:7px 9px;font-size:10px}}
+@media(max-width:380px){.grid{grid-template-columns:1fr}.hero p{max-width:260px}.pill{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="brand">DERBY OWNER<small>THOROUGHBRED OWNER SIMULATION</small></div>
+ <div class="topstats"><div class="pill">所持金 <b id="money">1億円</b></div><div class="pill">所有馬 <b id="horseCount">0頭</b></div><div class="pill">年度 <b>1年目</b></div></div>
+</header>
+<section class="hero"><div class="hero-copy"><div class="eyebrow">YOUR RACING LEGACY BEGINS</div><h1>一頭との出会いが、<br>歴史を変える。</h1><p>セリ市場で未来のスターホースを見つけよう。血統、能力、将来性を見極め、あなただけの競走馬オーナー人生を始めよう。</p></div><div class="hero-horse">🐎</div></section>
+<nav class="tabs">
+ <button class="tab active" data-tab="auction">セリ市場</button><button class="tab" data-tab="stable">馬管理</button><button class="tab" data-tab="guide">遊び方</button>
+</nav>
+<section id="auction" class="section active">
+ <div class="layout">
+  <div class="panel">
+   <div class="panel-head"><div><h2>セリ市場</h2><div class="sub">AUCTION HOUSE / 出品馬 20頭</div></div><span class="tag">1歳馬セール</span></div>
+   <div class="grid" id="auctionGrid"></div>
+  </div>
+  <aside class="panel">
+   <div class="panel-head"><div><h2>出品馬詳細</h2><div class="sub">HORSE PROFILE</div></div></div>
+   <div id="detail"><div class="empty">左の出品馬を選択すると<br>詳細情報が表示されます。</div></div>
+  </aside>
+ </div>
+</section>
+<section id="stable" class="section">
+ <div class="panel">
+  <div class="panel-head"><div><h2>所有馬一覧</h2><div class="sub">MY THOROUGHBREDS</div></div><span class="tag" id="stableCount">0頭</span></div>
+  <div id="stableList" class="stable-list"><div class="empty">まだ所有馬はいません。<br>セリ市場で最初の一頭を迎えましょう。</div></div>
+ </div>
+</section>
+<section id="guide" class="section">
+ <div class="panel">
+  <h2>ゲームの遊び方</h2>
+  <div class="note"><b>1. セリ市場で馬を選ぶ</b><br>出品馬をタップすると、血統・適性・能力・価格を確認できます。</div>
+  <div class="note"><b>2. 入札して購入</b><br>購入ボタンを押すと落札。購入した馬は「馬管理」に登録されます。</div>
+  <div class="note"><b>3. 能力を見極める</b><br>スピード、スタミナ、パワー、根性、瞬発力、成長力を比較して将来の活躍馬を探しましょう。</div>
+  <div class="note"><b>4. セーブ</b><br>購入状況はこの端末のブラウザに自動保存されます。同じSafariで開くと続きから遊べます。</div>
+  <div class="note">このバージョンはゲームの土台となるプロトタイプです。調教・レース・繁殖・3Dレース演出は今後のアップデートで追加します。</div>
+ </div>
+</section>
+<div class="footer">DERBY OWNER · PROTOTYPE VER.1.0 · GAME DATA SAVED LOCALLY</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const initialHorses = [
+["ノーブルアーク","牡","鹿毛","ディープ系","芝・中距離","先行",7200,[82,76,70,74,84,88]],
+["ミッドナイトベル","牝","青鹿毛","キング系","芝・マイル","差し",5800,[78,68,65,82,91,90]],
+["グランドリオン","牡","黒鹿毛","ロベルト系","芝・長距離","逃げ",6400,[74,91,86,88,62,79]],
+["サクラブレイヴ","牡","栗毛","サンデー系","芝・ダート","先行",8500,[89,78,88,80,83,86]],
+["ルミナスリリー","牝","芦毛","欧州系","芝・短距離","差し",4900,[86,59,67,72,88,84]],
+["オーシャンルート","牡","鹿毛","ミスプロ系","ダート・マイル","先行",5300,[80,73,92,79,70,82]],
+["フェアリーステップ","牝","栗毛","サンデー系","芝・中距離","追込",6100,[76,77,69,75,93,92]],
+["ヴァンガード","牡","青鹿毛","ノーザン系","芝・長距離","差し",9300,[91,94,85,90,87,95]],
+["コスモフロンティア","牡","芦毛","ロベルト系","ダート・中距離","逃げ",4200,[73,82,91,85,64,77]],
+["プリズムハート","牝","鹿毛","キング系","芝・マイル","先行",6800,[88,72,68,81,86,89]],
+["レッドクレスト","牡","栗毛","ミスプロ系","芝・短距離","逃げ",5600,[92,55,79,76,78,83]],
+["メテオシャワー","牡","鹿毛","サンデー系","芝・中距離","追込",7800,[85,79,73,77,94,91]],
+["ブルーローゼス","牝","青毛","欧州系","芝・長距離","差し",5100,[71,89,75,84,79,87]],
+["キングスパーク","牡","鹿毛","キング系","ダート・短距離","先行",4700,[84,61,90,73,76,80]],
+["スノーエトワール","牝","芦毛","ノーザン系","芝・中距離","差し",7500,[87,80,71,86,90,93]],
+["ダークホライズン","牡","黒鹿毛","ロベルト系","芝・ダート","追込",6600,[83,83,88,91,85,85]],
+["ハニーレガシー","牝","栗毛","サンデー系","芝・マイル","先行",4500,[79,69,66,78,82,88]],
+["テンペスト","牡","青鹿毛","ミスプロ系","ダート・中距離","逃げ",5900,[87,77,95,86,69,84]],
+["エターナルソング","牝","鹿毛","欧州系","芝・長距離","追込",6200,[80,92,72,89,91,94]],
+["ラピッドスター","牡","栗毛","ノーザン系","芝・短距離","先行",8100,[95,58,82,80,90,92]]
+].map((h,i)=>({id:i,name:h[0],sex:h[1],coat:h[2],blood:h[3],aptitude:h[4],style:h[5],price:h[6]*10000,stats:h[7],bought:false}));
+const statNames=["スピード","スタミナ","パワー","根性","瞬発力","成長力"];
+const yen=n=>n>=100000000?(n/100000000).toFixed(2).replace(/\.?0+$/,"")+"億円":Math.round(n/10000).toLocaleString()+"万円";
+let state={money:100000000,horses:[],selected:0,market:initialHorses};
+try{const saved=JSON.parse(localStorage.getItem("derbyOwnerSave"));if(saved&&typeof saved.money==="number"&&Array.isArray(saved.horses)){state.money=saved.money;state.horses=saved.horses;state.market=initialHorses.map(h=>({...h,bought:saved.horses.some(x=>x.id===h.id)}));}}catch(e){}
+function save(){localStorage.setItem("derbyOwnerSave",JSON.stringify({money:state.money,horses:state.horses}));}
+function toast(s){const t=document.getElementById("toast");t.textContent=s;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2100)}
+function renderHeader(){document.getElementById("money").textContent=yen(state.money);document.getElementById("horseCount").textContent=state.horses.length+"頭";document.getElementById("stableCount").textContent=state.horses.length+"頭"}
+function horseCard(h){return `<article class="horse-card ${state.selected===h.id?"selected":""}" onclick="selectHorse(${h.id})"><div class="horse-art"><span class="horse-label">${h.sex} · ${h.coat}</span><span class="horse-emoji">🐎</span></div><div class="horse-info"><div class="horse-name">${h.name}</div><div class="horse-meta">${h.blood} / ${h.aptitude}</div><div class="horse-price"><span class="price">${yen(h.price)}</span><span class="tag">${h.bought?"落札済":"出品中"}</span></div></div></article>`}
+function renderMarket(){document.getElementById("auctionGrid").innerHTML=state.market.map(h=>horseCard(h)).join("");renderDetail()}
+function selectHorse(id){state.selected=id;renderMarket()}
+function renderDetail(){const h=state.market.find(x=>x.id===state.selected);if(!h)return;const total=Math.round(h.stats.reduce((a,b)=>a+b,0)/h.stats.length);document.getElementById("detail").innerHTML=`<div class="detail"><div class="detail-art">🐎</div><div><h3>${h.name}</h3><p>${h.sex} / ${h.coat}<br>${h.blood}<br>${h.aptitude}・${h.style}</p></div></div><div class="sub">総合評価　<strong style="color:var(--gold2);font-size:18px">${total}</strong> / 100</div>${h.stats.map((v,i)=>`<div class="stat"><div class="stat-top"><span>${statNames[i]}</span><b>${v}</b></div><div class="bar"><i style="width:${v}%"></i></div></div>`).join("")}<div class="note">血統：${h.blood}<br>距離・馬場適性：${h.aptitude}<br>脚質傾向：${h.style}<br>成長力：${h.stats[5]} / 100</div><div style="display:flex;justify-content:space-between;align-items:center;margin:15px 0 10px"><span class="sub">現在のセリ価格</span><b class="price" style="font-size:18px">${yen(h.price)}</b></div><button class="btn" style="width:100%" onclick="buyHorse(${h.id})" ${h.bought||state.money<h.price?"disabled":""}>${h.bought?"落札済み":state.money<h.price?"資金が足りません":"この馬を購入する"}</button>${!h.bought?'<div class="sub" style="margin-top:9px;text-align:center">購入すると所有馬一覧に追加されます</div>':""}`}
+function buyHorse(id){const h=state.market.find(x=>x.id===id);if(!h||h.bought)return;if(state.money<h.price){toast("所持金が足りません");return}state.money-=h.price;h.bought=true;state.horses.push({...h});save();renderHeader();renderMarket();renderStable();toast(h.name+"を落札しました！")}
+function renderStable(){const el=document.getElementById("stableList");if(!state.horses.length){el.innerHTML='<div class="empty">まだ所有馬はいません。<br>セリ市場で最初の一頭を迎えましょう。</div>';return}el.innerHTML=state.horses.map(h=>`<div class="stable-item"><div class="mini">🐎</div><div><h3>${h.name}</h3><p>${h.sex}・${h.coat} / ${h.aptitude}<br>総合評価 ${Math.round(h.stats.reduce((a,b)=>a+b,0)/6)}　成長力 ${h.stats[5]}</p></div></div>`).join("")}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".section").forEach(x=>x.classList.toggle("active",x.id===b.dataset.tab));if(b.dataset.tab==="stable")renderStable()}));
+renderHeader();renderMarket();renderStable();
+</script>
+</body>
+</html>
